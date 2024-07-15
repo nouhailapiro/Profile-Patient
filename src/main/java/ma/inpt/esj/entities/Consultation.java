@@ -1,13 +1,9 @@
 package ma.inpt.esj.entities;
 
 import java.sql.Date;
+import java.util.List;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,4 +25,11 @@ public class Consultation {
     private Jeune jeune;
     @OneToOne(cascade = CascadeType.ALL)
     private Medecin medecin;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Correspondance correspondance;
+    @OneToMany(mappedBy = "consultation", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Prescription> prescriptions;
+    @ManyToOne
+    @JoinColumn(name = "dossier_medical_id")
+    private DossierMedical dossierMedical;
 }

@@ -21,12 +21,10 @@ import lombok.Builder;
 public class DossierMedical {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Consultation> historiqueConsultations;
     @ElementCollection
     private List<String> maladiesDiagnostiquees;
     @OneToMany(cascade = CascadeType.ALL)
-    private List<MedicamentPrescrit> medicamentsPrescrits;
+    private List<String> medicamentsPrescrits;
     @ElementCollection
     private List<String> antecedentsFamiliaux;
     @ElementCollection
@@ -35,10 +33,12 @@ public class DossierMedical {
     private List<String> antecedantsChirurgicaux;
     @ElementCollection
     private List<String> allergies;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "dossierMedical", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Consultation> historiqueConsultations;
+    @OneToMany(mappedBy = "dossierMedical", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PriseEnCharge> priseEnCharges;
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Correspondance> correspondances;
-    @OneToOne(cascade = CascadeType.ALL)
-    private Jeune jeune;
+//    @OneToMany(cascade = CascadeType.ALL)
+//    private List<Correspondance> correspondances;
+
+
 }

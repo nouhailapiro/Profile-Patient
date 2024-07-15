@@ -2,13 +2,7 @@ package ma.inpt.esj.entities;
 
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,11 +16,12 @@ public class Prescription {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ElementCollection
-    private List<String> médicaments;
+    private List<String> medicament;
     @ElementCollection
     private List<String> doses;
     @ElementCollection
     private List<String> instructions;
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Consultation consultation;
+
 }
