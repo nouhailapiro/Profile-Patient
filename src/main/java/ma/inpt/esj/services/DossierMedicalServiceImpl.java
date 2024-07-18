@@ -28,12 +28,9 @@ public class DossierMedicalServiceImpl implements DossierMedicalService {
         Optional<DossierMedical> optionalDossierMedical = dossierMedicalRepository.findById(id);
         if (optionalDossierMedical.isPresent()) {
             DossierMedical existingDossierMedical = optionalDossierMedical.get();
-            existingDossierMedical.setMaladiesDiagnostiquees(dossierMedical.getMaladiesDiagnostiquees());
-            existingDossierMedical.setAllergies(dossierMedical.getAllergies());
             existingDossierMedical.setAntecedentsFamiliaux(dossierMedical.getAntecedentsFamiliaux());
-            existingDossierMedical.setAntecedantsChirurgicaux(dossierMedical.getAntecedantsChirurgicaux());
+            existingDossierMedical.setAntecedentsPersonnels(dossierMedical.getAntecedentsPersonnels());
             existingDossierMedical.setHistoriqueConsultations(dossierMedical.getHistoriqueConsultations());
-            existingDossierMedical.setMedicamentsPrescrits(dossierMedical.getMedicamentsPrescrits());
             return dossierMedicalRepository.save(existingDossierMedical);
         } else {
             throw new RuntimeException("DossierMedical not found with id " + id);

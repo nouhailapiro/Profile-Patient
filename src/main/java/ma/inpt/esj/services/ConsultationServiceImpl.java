@@ -29,14 +29,16 @@ public class ConsultationServiceImpl implements ConsultationService {
         if (optionalConsultation.isPresent()) {
             Consultation existingConsultation = optionalConsultation.get();
             existingConsultation.setDate(consultation.getDate());
+            existingConsultation.setMotif(consultation.getMotif());
+            existingConsultation.setAntecedentPersonnel(consultation.getAntecedentPersonnel());
+            existingConsultation.setAntecedentFamilial(consultation.getAntecedentFamilial());
+            existingConsultation.setHistoriqueClinique(consultation.getHistoriqueClinique());
+            existingConsultation.setExamenClinique(consultation.getExamenClinique());
+            existingConsultation.setExamenMedical(consultation.getExamenMedical());
             existingConsultation.setDiagnostic(consultation.getDiagnostic());
-            existingConsultation.setPrestation(consultation.getPrestation());
-            existingConsultation.setReference(consultation.getReference());
-            existingConsultation.setObservations(consultation.getObservations());
             existingConsultation.setJeune(consultation.getJeune());
             existingConsultation.setMedecin(consultation.getMedecin());
             existingConsultation.setCorrespondance(consultation.getCorrespondance());
-            existingConsultation.setPrescriptions(consultation.getPrescriptions());
             return consultationRepository.save(existingConsultation);
         } else {
             throw new RuntimeException("Consultation not found with id " + id);
@@ -59,4 +61,3 @@ public class ConsultationServiceImpl implements ConsultationService {
         return consultationRepository.findAll();
     }
 }
-
