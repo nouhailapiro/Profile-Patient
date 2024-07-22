@@ -23,19 +23,22 @@ public class Consultation {
     private Long id;
     private Date date;
     private String motif;
+    @Embedded
     private AntecedentPersonnel antecedentPersonnel;
+    @Embedded
     private AntecedentFamilial antecedentFamilial;
     private String historiqueClinique;
     private String examenClinique;
-    private String ExamenMedical;
+    @Embedded
+    private ExamenMedical examenMedical;
     private String Diagnostic;
     private String Ordonnance;
     @OneToOne(cascade = CascadeType.ALL)
     private Jeune jeune;
     @OneToOne(cascade = CascadeType.ALL)
     private Medecin medecin;
-    @OneToOne(cascade = CascadeType.ALL)
-    private Correspondance correspondance;
+    // @OneToOne(cascade = CascadeType.ALL)
+    // private Correspondance correspondance;
     @ManyToOne
     @JoinColumn(name = "dossier_medical_id")
     private DossierMedical dossierMedical;

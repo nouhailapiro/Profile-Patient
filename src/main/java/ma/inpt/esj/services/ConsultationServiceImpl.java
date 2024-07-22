@@ -38,7 +38,7 @@ public class ConsultationServiceImpl implements ConsultationService {
             existingConsultation.setDiagnostic(consultation.getDiagnostic());
             existingConsultation.setJeune(consultation.getJeune());
             existingConsultation.setMedecin(consultation.getMedecin());
-            existingConsultation.setCorrespondance(consultation.getCorrespondance());
+            // existingConsultation.setCorrespondance(consultation.getCorrespondance());
             return consultationRepository.save(existingConsultation);
         } else {
             throw new RuntimeException("Consultation not found with id " + id);
