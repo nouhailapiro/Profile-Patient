@@ -1,9 +1,6 @@
 package ma.inpt.esj.services;
 
-
-
 import ma.inpt.esj.dto.ProfessionnelSanteDTO;
-import ma.inpt.esj.entities.Medecin;
 import ma.inpt.esj.entities.ProfessionnelSante;
 import ma.inpt.esj.exception.ProfessionnelException;
 import ma.inpt.esj.exception.ProfessionnelNotFoundException;
@@ -16,9 +13,11 @@ public interface ProfessionnelService {
 
     ProfessionnelSanteDTO getProfessionnelById(Long id) throws ProfessionnelNotFoundException;
 
-    ProfessionnelSanteDTO updateProfessionnel(Long id, Map<String, Object> updates) throws ProfessionnelNotFoundException;
+    ProfessionnelSanteDTO updateProfessionnel(Long id, Map<String, Object> updates)
+            throws ProfessionnelNotFoundException;
 
     void deleteProfessionnel(Long id) throws ProfessionnelNotFoundException, ProfessionnelException;
+
     List<ProfessionnelSanteDTO> getAllProfessionnels();
 
 }

@@ -1,6 +1,7 @@
 package ma.inpt.esj.controllers;
 
 import ma.inpt.esj.entities.Consultation;
+
 import ma.inpt.esj.services.ConsultationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/consultations")
+@RequestMapping("/{idMedecin}/consultations")
 public class ConsultationController {
 
     private final ConsultationService consultationService;
@@ -21,8 +22,9 @@ public class ConsultationController {
     }
 
     @PostMapping
-    public ResponseEntity<Consultation> createConsultation(@RequestBody Consultation consultation) {
-        Consultation savedConsultation = consultationService.saveConsultation(consultation);
+    public ResponseEntity<Consultation> createConsultation(@RequestBody Consultation consultation,
+            @PathVariable Long idMedecin) {
+        Consultation savedConsultation = consultationService.saveConsultation(consultation, idMedecin);
         return new ResponseEntity<>(savedConsultation, HttpStatus.CREATED);
     }
 
@@ -52,4 +54,3 @@ public class ConsultationController {
         return new ResponseEntity<>(consultations, HttpStatus.OK);
     }
 }
-

@@ -1,7 +1,5 @@
 package ma.inpt.esj.services;
 
-
-
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.AllArgsConstructor;
@@ -14,8 +12,6 @@ import ma.inpt.esj.mappers.MedecineMapper;
 import ma.inpt.esj.repositories.ConfirmationTokenRepository;
 import ma.inpt.esj.repositories.InfoUserRepository;
 import ma.inpt.esj.repositories.MedecinRepository;
-import org.hibernate.exception.ConstraintViolationException;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -34,7 +30,6 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class MedecinServiceImpl implements MedecinService {
 
-
     private static final long EXPIRATION_TIME_MS = 60 * 60 * 1000;
 
     private MedecinRepository medecinRepository;
@@ -43,7 +38,6 @@ public class MedecinServiceImpl implements MedecinService {
 
     private ConfirmationTokenRepository confirmationTokenRepository;
     private JavaMailSender mailSender;
-
 
     public MedecinResponseDTO saveMedecin(Medecin medecin) throws MedecinException {
         if (medecinRepository.existsByCin(medecin.getCin())) {
@@ -78,11 +72,12 @@ public class MedecinServiceImpl implements MedecinService {
         if (medecinOptional.isEmpty()) {
             throw new MedecinNotFoundException("Médecin non trouvé avec l'ID : " + id);
         }
-        MedecinResponseDTO medecinResponseDTO=medecineMapper.fromMedcine(medecinOptional.get());
+        MedecinResponseDTO medecinResponseDTO = medecineMapper.fromMedcine(medecinOptional.get());
         return medecinResponseDTO;
     }
 
-    public MedecinResponseDTO updateMedecinPartial(Long id, Map<String, Object> updates) throws MedecinNotFoundException {
+    public MedecinResponseDTO updateMedecinPartial(Long id, Map<String, Object> updates)
+            throws MedecinNotFoundException {
         Medecin existingMedecin = medecinRepository.findById(id)
                 .orElseThrow(() -> new MedecinNotFoundException("Medecin not found with id " + id));
 
@@ -146,7 +141,6 @@ public class MedecinServiceImpl implements MedecinService {
         }
     }
 
-
     @Override
     public Medecin confirmEmail(String token) {
         ConfirmationToken confirmationToken = confirmationTokenRepository.findByToken(token);
@@ -164,6 +158,7 @@ public class MedecinServiceImpl implements MedecinService {
             throw new RuntimeException("Invalid confirmation token");
         }
     }
+
     @Override
     public void sendEmail(String to, String subject, String htmlBody) {
         MimeMessage message = mailSender.createMimeMessage();
@@ -178,7 +173,8 @@ public class MedecinServiceImpl implements MedecinService {
             e.printStackTrace();
         }
     }
-     @Override
+
+    @Override
     public List<MedecinResponseDTO> getAllMedecins() {
         List<Medecin> medecins = medecinRepository.findAll();
         return medecins.stream()

@@ -33,9 +33,9 @@ public class Consultation {
     private ExamenMedical examenMedical;
     private String Diagnostic;
     private String Ordonnance;
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Jeune jeune;
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Medecin medecin;
     // @OneToOne(cascade = CascadeType.ALL)
     // private Correspondance correspondance;

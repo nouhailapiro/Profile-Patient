@@ -18,7 +18,7 @@ import lombok.ToString;
 public class ExamenMedical {
 
   private String typeExamen;
-  private String specification;
-  private String specificationAutre;
+  private String specificationExamen;
+  private String autreSpecification;
 
 }

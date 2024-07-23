@@ -7,8 +7,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
-
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -36,6 +37,9 @@ public class DossierMedical {
     private List<Consultation> historiqueConsultations;
     @OneToMany(mappedBy = "dossierMedical", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PriseEnCharge> priseEnCharges;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "jeune_id")
+    private Jeune jeune;
     // @OneToMany(cascade = CascadeType.ALL)
     // private List<Correspondance> correspondances;
 
